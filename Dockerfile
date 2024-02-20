@@ -1,4 +1,5 @@
 FROM ubuntu:latest AS builder
+
 RUN apt-get update -qq
 RUN apt-get install -y wget zip
 ENV TERRAFORM_VERSION=1.4.4
@@ -20,7 +21,7 @@ COPY --from=builder /usr/local/bin/terraform /usr/local/bin/
 
 RUN usermod -aG docker abc
 
-RUN apt-get install rclone make vim
+RUN apt-get install -y rclone make vim
 
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
